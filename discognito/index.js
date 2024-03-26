@@ -21,20 +21,16 @@ const client = new Client({
 });
 
 // new Collection added to the client instance that will hold all current Text Channels
-client.textChanels = new Collection();
+client.textChannels = new Collection();
 
 client.once(Events.ClientReady, async (readyClient) => {
   console.log(`Ready! Logged in as ${readyClient.user.tag}`);
 
   for (const [key, value] of client.channels.cache) {
-    if (value instanceof TextChannel) client.textChanels.set(key, value);
+    if (value instanceof TextChannel) client.textChannels.set(key, value);
   }
-  console.log(client.textChanels);
   // attach Event listeners
   eventListeners(client);
 });
-
-// Log in to Discord with your client's token
-client.login(process.env.DISCORD_TOKEN);
 
 module.exports = client;

@@ -1,7 +1,6 @@
 const createError = require("http-errors");
 const express = require("express");
 const path = require("path");
-const discognito = require("./discognito/index");
 
 const indexRouter = require("./routes/index");
 
@@ -28,5 +27,24 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.send("error");
 });
+
+const port = normalizePort(process.env.PORT || "3000");
+app.set("port", port);
+
+function normalizePort(val) {
+  const port = parseInt(val, 10);
+
+  if (isNaN(port)) {
+    // named pipe
+    return val;
+  }
+
+  if (port >= 0) {
+    // port number
+    return port;
+  }
+
+  return false;
+}
 
 module.exports = app;
