@@ -1,3 +1,4 @@
+// discord.js client created  and connected to Discord API
 const {
   Client,
   Collection,
@@ -5,11 +6,7 @@ const {
   GatewayIntentBits,
   TextChannel,
 } = require("discord.js");
-const dotenv = require("dotenv");
 const eventListeners = require("./event-listeners");
-
-// initialize environ variables
-dotenv.config();
 
 // Create a new client instance
 const client = new Client({
