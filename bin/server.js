@@ -1,4 +1,4 @@
-const app = require("../app");
+const app = require("../app/app.js");
 const http = require("http");
 const { Server } = require("socket.io");
 

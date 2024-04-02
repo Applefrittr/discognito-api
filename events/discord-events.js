@@ -1,12 +1,15 @@
 const { Events } = require("discord.js");
 const { io } = require("../bin/server");
 
-// helper function that will attach Event listeners to the client instance passed
+// helper function that will attach Event listeners to the Discord client instance passed
 const discordEvents = (client) => {
   // Discognito Bot listener that fires when a new message is posted into a channel that the bot has permission
   client.on(Events.MessageCreate, async (message) => {
     console.log(message);
-    io.sockets.emit("new message", message, message.author); // forward message to all Discognito clients connected via socket.io
+    // forward message to sockets currently in the specifc channelId Room
+    io.sockets
+      .to(message.channelId)
+      .emit("new message", message, message.author);
   });
 };
 
