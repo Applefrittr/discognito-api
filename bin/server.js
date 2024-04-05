@@ -1,6 +1,6 @@
 const app = require("../app/app.js");
 const http = require("http");
-const { Server } = require("socket.io");
+const { Server } = require("socket.io"); // Socket.io package used to set up socket connections to front end client
 
 const server = http.createServer(app);
 

@@ -1,5 +1,7 @@
 #!/usr/bin/env node
-
+// Main Execution file for Discognito API.  API's main function is to act a sort of "proxy" or "middleman" between the Discord API and Discognito's client side App.
+// API sets up a socket connection to the Discord API via the discord.js package.  Front end clients can then conenct to the API via socket.io.  Event handlers fire once data
+// is recieved from the Discord API and then forwarded via socket connection to the connected clients, which is then redndered/udpated in the client-side UI.
 const debug = require("debug")("discognito-api:server");
 const { server, io } = require("./server.js");
 const discognito = require("../app/discord-client.js");
