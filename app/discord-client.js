@@ -27,7 +27,7 @@ client.once(Events.ClientReady, (readyClient) => {
   for (const [key, value] of client.channels.cache) {
     if (value instanceof TextChannel) {
       // console.log(value);
-      console.log(value.guild);
+      //console.log(value.guild);
       client.textChannels.push({
         guildName: value.guild.name,
         guildID: value.guild.id,
