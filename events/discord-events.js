@@ -1,14 +1,25 @@
 const { Events, TextChannel } = require("discord.js");
 const { io } = require("../bin/server");
+const extractEmbeds = require("../javascript/extractEmbeds");
 
 // helper function that will attach Event listeners to the Discord client instance passed
 const discordEvents = (client) => {
   // Discognito Bot listener that fires when a new message is posted into a channel that the bot has permission
   client.on(Events.MessageCreate, (message) => {
+    // Extract any embeds within the recieved message object from Discord.  IMPORTANT -- Function will ONLY extract GIFs provided by Tenor (Tenor GIF search intigrated into the Discord UI)
+    let embeds = [];
+    if (message.embeds.length > 0) embeds = extractEmbeds(message.embeds);
+
     // forward message to sockets currently in the specifc channelId Room
     io.sockets
       .to(message.channelId)
-      .emit("new message", message, message.author, message.author.avatarURL());
+      .emit(
+        "new message",
+        message,
+        message.author,
+        message.author.avatarURL(),
+        embeds
+      );
   });
 
   // listener that fires when the Discognito Bot is added to a new server/guild
