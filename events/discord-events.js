@@ -22,6 +22,11 @@ const discordEvents = (client) => {
       );
   });
 
+  // listener fires when a message is deleted in a Text Channel.  Will emit message ID to Discognito client to remove message from UI
+  client.on(Events.MessageDelete, (message) => {
+    io.sockets.to(message.channelId).emit("delete message", message.id);
+  });
+
   // listener that fires when the Discognito Bot is added to a new server/guild
   client.on(Events.GuildCreate, (guild) => {
     console.log("Discognito added to new server!  Id:", guild.id);
