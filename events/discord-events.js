@@ -27,6 +27,13 @@ const discordEvents = (client) => {
     io.sockets.to(message.channelId).emit("delete message", message.id);
   });
 
+  // listener fires when a message is updated.  Pulls updated content filed from message payload and emits the message id and updated content to client
+  client.on(Events.MessageUpdate, (message) => {
+    io.sockets
+      .to(message.channelId)
+      .emit("update message", message.id, message.reactions.message.content);
+  });
+
   // listener that fires when the Discognito Bot is added to a new server/guild
   client.on(Events.GuildCreate, (guild) => {
     console.log("Discognito added to new server!  Id:", guild.id);
