@@ -38,7 +38,7 @@ const discordEvents = (client) => {
   client.on(Events.GuildCreate, (guild) => {
     console.log("Discognito added to new server!  Id:", guild.id);
 
-    // Access the channels cache of the newly added guild and push the TextChannels only to the clients textChannels attribute, which is then emitted to the client for rendering
+    // Access the channels cache of the newly added guild and push the TextChannels only to the discord.js client's textChannels attribute, which is then emitted to the front-end client for rendering
     for (const [key, value] of guild.channels.cache) {
       if (value instanceof TextChannel) {
         client.textChannels.push({
