@@ -2,8 +2,8 @@
 // Main Execution file for Discognito API.  API's main function is to act a sort of "proxy" or "middleman" between the Discord API and Discognito's client side App.
 // API sets up a socket connection to the Discord API via the discord.js package.  Front end clients can then conenct to the API via socket.io.  Event handlers fire once data
 // is recieved from the Discord API and then forwarded via socket connection to the connected clients, which is then redndered/udpated in the client-side UI.
-const debug = require("debug")("discognito-api:server");
-const { server, io } = require("./server.js");
+const debug = require("debug")("discognito:server");
+const { server, io } = require("../app/server.js");
 const discognito = require("../app/discord-client.js");
 const socketEvents = require("../events/socket-events.js");
 const dotenv = require("dotenv");
@@ -14,8 +14,8 @@ dotenv.config();
 // Discognito client connection listener. Emit textChannels array to the newly connected socket and attach socket event listeners.  Log socket connection
 // and current conenction count
 io.on("connection", (socket) => {
-  console.log("Discognito client connected!");
-  console.log("Current connections:", io.sockets.sockets.size);
+  debug("Discognito client connected!");
+  debug("Current connections:", io.sockets.sockets.size);
   io.emit("get channels", discognito.textChannels);
 
   // attach socket listners
@@ -27,10 +27,6 @@ discognito.login(process.env.DISCORD_TOKEN);
 
 // start server
 server.listen(process.env.PORT);
-console.log(
-  "///////////////////////// Discognito Server Start /////////////////////////"
-);
-console.log(`Listening on http://localhost:${process.env.PORT}`);
 server.on("error", onError);
 server.on("listening", onListening);
 
@@ -67,5 +63,6 @@ function onError(error) {
 function onListening() {
   const addr = server.address();
   const bind = typeof addr === "string" ? "pipe " + addr : "port " + addr.port;
+  debug("/////////// Discognito Server Start ///////////");
   debug("Listening on " + bind);
 }

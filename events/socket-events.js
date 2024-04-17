@@ -1,3 +1,5 @@
+const debug = require("debug")("discognito:client");
+
 // helper funtion to attach listeners to socket connection
 const socketEvents = (socket, io) => {
   // join the passed channel id Room
@@ -12,8 +14,8 @@ const socketEvents = (socket, io) => {
 
   // log socket disconnection and current connected socket count
   socket.on("disconnect", () => {
-    console.log("Discognito client disconnected :/");
-    console.log("Current connections:", io.sockets.sockets.size);
+    debug("Discognito client disconnected :/");
+    debug("Current connections:", io.sockets.sockets.size);
   });
 };
 

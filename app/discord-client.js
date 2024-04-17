@@ -1,4 +1,5 @@
 // discord.js client created  and connected to Discord API
+const debug = require("debug")("discognito:bot");
 const {
   Client,
   Events,
@@ -20,7 +21,7 @@ const client = new Client({
 client.textChannels = [];
 
 client.once(Events.ClientReady, (readyClient) => {
-  console.log(`Ready! Logged in as ${readyClient.user.tag}`);
+  debug(`Ready! Logged in as ${readyClient.user.tag}`);
 
   // access the channels cache Collection of the client instance and push only the TEXT Channels (exclude Categories and Voice) to the clients's textChannels array.  The array will be
   // passed onto the Discognito client through a socket connection to be rendered in the UI
