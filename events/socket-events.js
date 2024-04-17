@@ -1,4 +1,4 @@
-const debug = require("debug")("discognito:client");
+const debug = require("debug")("discognito:server");
 
 // helper funtion to attach listeners to socket connection
 const socketEvents = (socket, io) => {
