@@ -28,7 +28,7 @@ const discordEvents = (client) => {
         attachments
       );
 
-    debug("Incoming Message from Discord :)", message.embeds);
+    debug("Incoming Message from Discord :)");
   });
 
   // listener fires when a message is deleted in a Text Channel.  Will emit message ID to Discognito client to remove message from UI
