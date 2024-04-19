@@ -5,7 +5,7 @@ const server = http.createServer();
 
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: "https://discognito-app-production.up.railway.app",
     methods: ["GET", "POST"],
   },
 });
