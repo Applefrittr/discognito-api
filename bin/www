@@ -3,8 +3,8 @@
 // API sets up a socket connection to the Discord API via the discord.js package.  Front end clients can then conenct to the API via socket.io.  Event handlers fire once data
 // is recieved from the Discord API and then forwarded via socket connection to the connected clients, which is then redndered/udpated in the client-side UI.
 const debug = require("debug")("discognito:server");
-const { server, io } = require("../app/server.js");
-const discognito = require("../app/discord-client.js");
+const { server, io } = require("../app/server.js"); // Initialize the server
+const discognito = require("../app/discord-client.js"); // Initialize the discord.js client -- the Discognito Bot user --
 const socketEvents = require("../events/socket-events.js");
 const dotenv = require("dotenv");
 
@@ -29,6 +29,8 @@ discognito.login(process.env.DISCORD_TOKEN);
 server.listen(process.env.PORT);
 server.on("error", onError);
 server.on("listening", onListening);
+
+// Boiler plate functions from express-generator -- yes, I used express-generator to scaffold this project, even though I took express out :D
 
 /**
  * Event listener for HTTP server "error" event.
