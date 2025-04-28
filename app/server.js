@@ -5,7 +5,7 @@ const server = http.createServer();
 
 const io = new Server(server, {
   cors: {
-    origin: "https://discognito-app-production.up.railway.app",
+    origin: "https://applefrittr.github.io/discognito-app",
     methods: ["GET", "POST"],
   },
 });
